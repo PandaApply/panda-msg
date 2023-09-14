@@ -1,0 +1,16 @@
+{
+    "name": "panda/msg", # 包名称
+    "description": "This is a public chat extension package",
+    "autoload": {
+        "psr-4": {
+            "Panda\\Msg\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "赵宏宇",
+            "email": "327698476@qq.com"
+        }
+    ],
+    "require": {}
+}
