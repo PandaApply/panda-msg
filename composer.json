@@ -1,7 +1,6 @@
 {
     "name": "panda-zhy/msg",
     "description": "This is a public chat extension package",
-    "version": "1.0",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
