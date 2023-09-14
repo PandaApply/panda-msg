@@ -1,10 +1,16 @@
 {
-    "name": "panda/msg", # 包名称
+    "name": "panda/msg",
     "description": "This is a public chat extension package",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Panda\\Msg\\": "src/"
-        }
+            "panda\\msg\\": "src/"
+        },
+        "files": [
+            "src/helper.php"
+        ]
     },
     "authors": [
         {
@@ -12,5 +18,10 @@
             "email": "327698476@qq.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.0",
+        "workerman/gateway-worker": "^3.0",
+        "workerman/gatewayclient": "3.0.0",
+        "topthink/framework": "^5.1.10 || ^6.0.0"
+    }
 }

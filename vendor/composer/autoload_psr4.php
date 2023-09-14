@@ -6,5 +6,13 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Panda\\Msg\\' => array($baseDir . '/src'),
+    'think\\' => array($vendorDir . '/topthink/framework/src/think', $vendorDir . '/topthink/think-helper/src', $vendorDir . '/topthink/think-orm/src'),
+    'panda\\msg\\' => array($baseDir . '/src'),
+    'Workerman\\' => array($vendorDir . '/workerman/workerman'),
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'GatewayWorker\\' => array($vendorDir . '/workerman/gateway-worker/src'),
+    'GatewayClient\\' => array($vendorDir . '/workerman/gatewayclient'),
 );
