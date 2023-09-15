@@ -23,5 +23,15 @@
         "workerman/gateway-worker": "^3.0",
         "workerman/gatewayclient": "3.0.0",
         "topthink/framework": "^5.1.10 || ^6.0.0 || ^8.0.0"
+    },
+    "extra": {
+        "think": {
+            "services": [
+                "panda\\msg\\Service"
+            ],
+            "config": {
+                "panda": "config/panda.php"
+            }
+        }
     }
 }

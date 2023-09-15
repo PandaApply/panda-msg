@@ -60,3 +60,77 @@
 }
 ```
 上述配置将允许安装 some/package 的 beta 和稳定版本，同时倾向于安装稳定版本。
+
+
+## Composer中的autoload自动加载 （PSR-4 是当前推荐的加载方式）
+参考：[Composer的自动加载机制](https://www.cnblogs.com/caibaotimes/p/13810329.html)
+1. PSR-0（不推荐使用);
+2. PSR-4 : `{'psr-4':{ "Panda\\Msg\\": "src/"}}` 是一个基于psr-4（http://www.php-fig.org/psr/psr-4/）规则的类库自动加载对应关系，只要在其后的对象中，以 "命名空间": "路径" 的方式写入自己的类库信息即可。
+3. Class-map : `{'class-map':['a/','b/','c/']}`composer会搜寻我们指定的目录或文件,会自动扫描a，b，c目录下以.php结尾的class。并生成新的文件映射关系，放到/vendor/composer/aotuload_classmap
+4. Files : `"files": ["src/helper.php" ]` 这个一般都是加载全局php文件,这种方式不管加载的文件是否用到始终都会加载，而不是按需加载
+
+### 自动加载索
+当我们更改了 composer.json 文件中的 autoload 时，需要执行 composer dump-autoload，来让 autoload 立即生效。而不必执行 install 或 update 命令。
+```shell
+composer dump-autoload
+composer dumpautoload -o
+```
+
+## repositories属性详解
+> 默认的，Composer 只使用 Packagist 仓库。通过指定仓库地址，你可以从任何地方获取包。
+
+支持的仓库的类型有：
+1. composer
+   composer 仓库通过网络提供 packages.json 文件，它包含一个 composer.json 对象的列表，还有额外的 dist 或 source 信息。packages.json 文件通过 PHP 流加载。
+2. vcs
+   版本控制系统仓库，如：git、svn、hg。
+3. pear
+   通过它，你可以导入任何 pear 仓库到你的项目中。
+4. package
+   如果你依赖一个不支持 composer 的项目，你可以定义一个 package 类型的仓库，然后将 composer.json 对象直接写入。
+
+```json
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.example.com"
+        },
+        {
+            "type": "composer",
+            "url": "https://packages.example.com",
+            "options": {
+                "ssl": {
+                    "verify_peer": "true"
+                }
+            }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Seldaek/monolog"
+        },
+        {
+            "type": "pear",
+            "url": "http://pear2.php.net"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "smarty/smarty",
+                "version": "3.1.7",
+                "dist": {
+                    "url": "http://www.smarty.net/files/Smarty-3.1.7.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "http://smarty-php.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference": "tags/Smarty_3_1_7/distribution/"
+                }
+            }
+        }
+    ]
+}
+
+```
+## composer中的extra(扩展)属性
