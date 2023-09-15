@@ -21,7 +21,26 @@ class SecretCommand extends \think\console\Command
         // 源目录
         $sourceDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'workman' . DIRECTORY_SEPARATOR;
         // 目标目录
-        $targetDir =app()->getAppPath() . 'common' . DIRECTORY_SEPARATOR . 'workman'. DIRECTORY_SEPARATOR;
+        $targetDir = app()->getAppPath() . 'common' . DIRECTORY_SEPARATOR . 'workman' . DIRECTORY_SEPARATOR;
+        $this->createConfig($sourceDir, $targetDir, $output);
+
+        // 创建workman启动文件
+        // 源目录
+        $sourceDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'start' . DIRECTORY_SEPARATOR;
+        // 目标目录
+        $targetDir = app()->getAppPath() . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR;
+        $this->createConfig($sourceDir, $targetDir, $output);
+    }
+
+
+    /**
+     * 创建配置文件
+     * @param $sourceDir
+     * @param $targetDir
+     * @return void
+     */
+    public function createConfig($sourceDir, $targetDir, $output)
+    {
         // 打开目标目录
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true);
@@ -46,48 +65,6 @@ class SecretCommand extends \think\console\Command
                 }
             }
             closedir($handle);
-        }
-    }
-
-    /**
-     * 递归创建目录
-     * @param string $dir 要创建的目录路径
-     * @param int $mode 目录权限（默认为0777，表示最大权限）
-     * @return bool 创建成功返回true，否则返回false
-     */
-    public function recursiveMkdir(string $dir, int $mode = 0777)
-    {
-        if (is_dir($dir) || mkdir($dir, $mode, true)) {
-            return true;
-        }
-        if (!$this->recursiveMkdir(dirname($dir), $mode)) {
-            return false;
-        }
-        return mkdir($dir, $mode);
-    }
-
-    public function createConfig($output)
-    {
-        $configFilePath = app()->getAppPath() . '..' . DIRECTORY_SEPARATOR . 'config'
-            . DIRECTORY_SEPARATOR . 'jwt.php';
-
-        if (!is_file($configFilePath)) {
-            $res = copy(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..'
-                . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR
-                . 'config.php', $configFilePath);
-
-            if ($res) {
-                $output->writeln('Create config file success:' . $configFilePath);
-            } else {
-                $output->writeln('Create config file error');
-                return;
-            }
-        }
-
-        if (str_starts_with(\think\App::VERSION, '6.')) {
-            $config = file_get_contents($configFilePath);
-            $config = str_replace('Tp5', 'Tp6', $config);
-            file_put_contents($configFilePath, $config);
         }
     }
 }
