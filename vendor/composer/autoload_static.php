@@ -9,7 +9,7 @@ class ComposerStaticInitc38999b0ff24ff86388a35f26e9610a0
     public static $files = array (
         '9b552a3cc426e3287cc811caefa3cf53' => __DIR__ . '/..' . '/topthink/think-helper/src/helper.php',
         '35fab96057f1bf5e7aba31a8a6d5fdde' => __DIR__ . '/..' . '/topthink/think-orm/stubs/load_stubs.php',
-        '13ed4658fceb0e06c5a04963c575188a' => __DIR__ . '/../..' . '/src/helper.php',
+        '6edd281ccbe357290066c81204e587b3' => __DIR__ . '/../..' . '/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
