@@ -12,18 +12,19 @@ use \Workerman\Worker;
 use \GatewayWorker\BusinessWorker;
 
 // 自动加载类
-require_once __DIR__.'/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
+$config = new   \think\Config();
 
 // bussinessWorker 进程
 $worker = new BusinessWorker();
 // worker名称
-$worker->name = 'BusinessWorker';
-$worker->eventHandler = 'Panda\msg\Socket';
+$worker->name = $config->get('panda.businessWorkerName');
+$worker->eventHandler = $config->get('panda.eventHandler');
 // bussinessWorker进程数量
-$worker->count = 4;
+$worker->count = $config->get('panda.BusinessWorkerCount');
 // 服务注册地址
-$worker->registerAddress = '127.0.0.1:10110';
+$worker->registerAddress = $config->get('panda.registerAddress');
 
 // 如果不是在根目录启动，则运行runAll方法
 if (!defined('GLOBAL_START')) {
