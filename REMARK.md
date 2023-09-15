@@ -1,3 +1,9 @@
+> 参考文档：
+>
+> composer常用命令：[这些Composer命令，你肯定用到着！](https://zhuanlan.zhihu.com/p/150968844)
+> 
+> 
+
 ```json
 {
     "name": "panda/msg", // 包名称

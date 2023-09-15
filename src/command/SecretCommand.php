@@ -17,19 +17,7 @@ class SecretCommand extends \think\console\Command
 
     public function execute(Input $input, Output $output)
     {
-        // 创建config/panda.php
-        $configFilePath = app()->getAppPath() . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'panda.php';
-        if (!is_file($configFilePath)) {
-            $res = copy(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'panda.php', $configFilePath);
-            if ($res) {
-                $output->writeln('创建配置文件成功:' . $configFilePath);
-            } else {
-                $output->writeln('创建配置文件失败');
-                return;
-            }
-        }
         // 创建workman工作目录----覆盖操作
-//        $this->recursiveMkdir($workerManFilePath);
         // 源目录
         $sourceDir = __DIR__ . DIRECTORY_SEPARATOR . 'workman/';
         // 目标目录
