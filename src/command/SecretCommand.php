@@ -19,9 +19,9 @@ class SecretCommand extends \think\console\Command
     {
         // 创建workman工作目录----覆盖操作
         // 源目录
-        $sourceDir = __DIR__ . DIRECTORY_SEPARATOR . 'workman/';
+        $sourceDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'workman' . DIRECTORY_SEPARATOR;
         // 目标目录
-        $targetDir = app()->getAppPath() . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . 'workman/';
+        $targetDir =app()->getAppPath() . 'common' . DIRECTORY_SEPARATOR . 'workman'. DIRECTORY_SEPARATOR;
         // 打开目标目录
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true);
