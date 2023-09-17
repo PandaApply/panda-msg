@@ -18,35 +18,35 @@ use app\common\exception\ErrorEnum;
 
 // 自动加载类
 require_once __DIR__.'/../../../vendor/autoload.php';
-$config = new   \think\Config();
+$config = require_once __DIR__.'/../../../config/panda.php';
 
 
 // gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = new Gateway($config->get('panda.protocol'));
+$gateway = $config('protocol');
 // gateway名称，status方便查看
-$gateway->name = $config->get('panda.gatewayName');
+$gateway->name = $config('gatewayName');
 // gateway进程数
-$gateway->count = $config->get('panda.gatewayCount');
+$gateway->count = $config('gatewayCount');
 // 本机ip，分布式部署时使用内网ip
-$gateway->lanIp = $config->get('panda.lanIp');
+$gateway->lanIp = $config('lanIp');
 /**
  * Gateway进程启动后会监听一个本机端口，用来给BusinessWorker提供链接服务，
  * 然后Gateway与BusinessWorker之间就通过这个连接通讯。这里设置的是Gateway监听本机端口的起始端口。
  * 比如启动了4个Gateway进程，startPort为2000，则每个Gateway进程分别启动的本地端口一般为2000、2001、2002、2003。
  *
  */
-$gateway->startPort = $config->get('panda.gatewayStartPort');
+$gateway->startPort = $config('gatewayStartPort');
 
 // 服务注册地址 微服务
-$gateway->registerAddress = $config->get('panda.registerAddress');
+$gateway->registerAddress = $config('registerAddress');
 
 // 心跳间隔
-$gateway->pingInterval = $config->get('panda.pingInterval');
+$gateway->pingInterval = $config('pingInterval');
 //  0代表服务端允许客户端不发送心跳，服务端不会因为客户端长时间没发送数据而断开连接
 // 1 代表客户端必须定时发送数据给服务端，否则pingNotResponseLimit*pingInterval秒内没有任何数据发来则关闭对应连接，并触发onClose。
-$gateway->pingNotResponseLimit = $config->get('panda.pingNotResponseLimit');
+$gateway->pingNotResponseLimit = $config('pingNotResponseLimit');
 // 心跳数据
-$gateway->pingData = $config->get('panda.pingData');
+$gateway->pingData = $config('pingData');
 
 /*
 // 当客户端连接上来时，设置连接的onWebSocketConnect，即在websocket握手时的回调

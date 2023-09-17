@@ -13,18 +13,17 @@ use \GatewayWorker\BusinessWorker;
 
 // 自动加载类
 require_once __DIR__ . '/../../../vendor/autoload.php';
-
-$config = new   \think\Config();
+$config = require_once __DIR__.'/../../../config/panda.php';
 
 // bussinessWorker 进程
 $worker = new BusinessWorker();
 // worker名称
-$worker->name = $config->get('panda.businessWorkerName');
-$worker->eventHandler = $config->get('panda.eventHandler');
+$worker->name = $config['businessWorkerName'];
+$worker->eventHandler = $config['eventHandler'];
 // bussinessWorker进程数量
-$worker->count = $config->get('panda.BusinessWorkerCount');
+$worker->count = $config['BusinessWorkerCount'];
 // 服务注册地址
-$worker->registerAddress = $config->get('panda.registerAddress');
+$worker->registerAddress = $config['registerAddress'];
 
 // 如果不是在根目录启动，则运行runAll方法
 if (!defined('GLOBAL_START')) {
