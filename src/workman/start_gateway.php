@@ -22,7 +22,7 @@ $config = require_once __DIR__.'/../../../config/panda.php';
 
 
 // gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = $config('protocol');
+$gateway = new Gateway($config('protocol'));;
 // gateway名称，status方便查看
 $gateway->name = $config('gatewayName');
 // gateway进程数
