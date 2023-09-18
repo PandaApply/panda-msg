@@ -5,6 +5,8 @@
 return [
     // 服务注册地址
     'registerAddress' => '127.0.0.1:10110',
+    // register 必须是text协议
+    'registerProtocol' => 'text://0.0.0.0:10110',
     // BusinessWorker名称
     'businessWorkerName' => 'BusinessWorker',
     // BusinessWorker进程数量
