@@ -26,7 +26,7 @@ class PandaMsg extends Gateway
      * @param bool $raw 是否发送原始数据（即不调用gateway的协议的encode方法）
      * @return void
      */
-    public static function sendAll(array $data, array $client_id_array = null, array $exclude_client_id = null, bool $raw = false): void
+    public function sendAll(array $data, array $client_id_array = null, array $exclude_client_id = null, bool $raw = false): void
     {
         self::sendToAll(json_encode($data));
     }
@@ -38,7 +38,7 @@ class PandaMsg extends Gateway
      * @param array|null $exclude_client_id 不给这些client_id发
      * @param bool $raw 发送原始数据（即不调用gateway的协议的encode方法）
      */
-    public static function sendMsgGroup(array|int|string $group, array $data, array $exclude_client_id = null, bool $raw = false)
+    public function sendMsgGroup(array|int|string $group, array $data, array $exclude_client_id = null, bool $raw = false)
     {
         return self::sendToGroup($group, json_encode($data), $exclude_client_id, $raw);
     }
@@ -50,13 +50,13 @@ class PandaMsg extends Gateway
      * @param int|string|array $uid
      * @param array $data 数据
      */
-    public static function sendMsgUid(int|string|array $uid, array $data): void
+    public function sendMsgUid(int|string|array $uid, array $data): void
     {
         self::sendToUid($uid, json_encode($data));
     }
 
 
-    public static function socketRes($type, $data = [], $msg = "")
+    public function socketRes($type, $data = [], $msg = "")
     {
         $result = [
             "type" => $type,
@@ -64,7 +64,7 @@ class PandaMsg extends Gateway
             "data" => $data,
             "time" => time()
         ];
-        return json_encode($result);
+        return $result;
     }
 
 }
