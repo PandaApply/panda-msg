@@ -1,2 +1,2 @@
 <?php
-echo "Files自动加载".PHP_EOL;
+//echo "Files自动加载".PHP_EOL;
