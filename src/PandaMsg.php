@@ -18,47 +18,20 @@ class PandaMsg extends Gateway
     }
 
     /**
-     * 向所有客户端连接(或者 client_id_array 指定的客户端连接)广播消息
-     *
-     * @param array $data 向客户端发送的消息
-     * @param array|null $client_id_array 客户端 id 数组
-     * @param array|null $exclude_client_id 不给这些client_id发
-     * @param bool $raw 是否发送原始数据（即不调用gateway的协议的encode方法）
-     * @return void
-     */
-    public function sendAll(array $data, array $client_id_array = null, array $exclude_client_id = null, bool $raw = false): void
-    {
-        self::sendToAll(json_encode($data));
-    }
-
-    /**
-     * 向 group 发送
-     * @param array|int|string $group 组（不允许是 0 '0' false null array()等为空的值）
-     * @param array $data 数据
-     * @param array|null $exclude_client_id 不给这些client_id发
-     * @param bool $raw 发送原始数据（即不调用gateway的协议的encode方法）
-     */
-    public function sendMsgGroup(array|int|string $group, array $data, array $exclude_client_id = null, bool $raw = false)
-    {
-        return self::sendToGroup($group, json_encode($data), $exclude_client_id, $raw);
-    }
-
-
-    /**
      * 向uid绑定的所有在线client_id发送数据。
      *
      * @param int|string|array $uid
      * @param array $data 数据
      */
-    public function sendMsgUid(int|string|array $uid, array $data): void
+    public function sendMsgUid(int|string|array $uid, string $message): void
     {
         if (self::isUidOnline($uid)){
-            self::sendToUid($uid, json_encode($data));
+            self::sendToUid($uid, $message);
         }
     }
 
 
-    public function socketRes($type, $data = [], $msg = "")
+    public static function socketRes($type, $data = [], $msg = "")
     {
         $result = [
             "type" => $type,
@@ -66,7 +39,7 @@ class PandaMsg extends Gateway
             "data" => $data,
             "time" => time()
         ];
-        return $result;
+        return json_encode($result);
     }
 
 }
