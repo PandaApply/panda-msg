@@ -52,7 +52,9 @@ class PandaMsg extends Gateway
      */
     public function sendMsgUid(int|string|array $uid, array $data): void
     {
-        self::sendToUid($uid, json_encode($data));
+        if (self::isUidOnline($uid)){
+            self::sendToUid($uid, json_encode($data));
+        }
     }
 
 
