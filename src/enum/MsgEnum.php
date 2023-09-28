@@ -31,4 +31,6 @@ abstract class MsgEnum
      */
     const CHAT_WITHDRAW = 'chat_withdraw';
 
+
+
 }

@@ -16,7 +16,7 @@ use \GatewayWorker\Register;
 
 // 自动加载类
 require_once __DIR__.'/../../../vendor/autoload.php';
-$config = require_once __DIR__.'/../../../config/panda.php';
+$config = include __DIR__.'/../../../config/panda.php';
 
 // register 必须是text协议
 $register = new Register($config['registerProtocol']);

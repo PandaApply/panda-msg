@@ -13,7 +13,7 @@ use \GatewayWorker\BusinessWorker;
 
 // 自动加载类
 require_once __DIR__ . '/../../../vendor/autoload.php';
-$config = require_once __DIR__.'/../../../config/panda.php';
+$config = include __DIR__.'/../../../config/panda.php';
 
 // bussinessWorker 进程
 $worker = new BusinessWorker();

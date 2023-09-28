@@ -140,3 +140,22 @@ composer dumpautoload -o
 
 ```
 ## composer中的extra(扩展)属性
+
+
+## 发布一个Composer包
+1. 打开[Github](https://github.com/PandaApply/panda-msg.git),复制要发布的Composer扩展
+2. 打开[Packagist](https://packagist.org/)点击右上角的Submit
+3. 将仓库的地址填入Repository URL，然后点击Check
+4. 最后回到Github，Release一个版本，packagist就能自动更新
+
+> composer require panda-zhy/msg
+> 
+> 发布成功安装会报错 Could not find a version of package panda-zhy/msg matching your minimum-stability (stable). Require it with an explicit version constraint allowing its desired stability.
+> 
+> 解决办法:
+> 1. composer require panda-zhy/msg:dev-master 需要加上dev-master  才行。因为这还不是一个正式的版本
+> 2. composer会自动解析git的版本 
+>    1. git commiit后执行git tag给代码打上标签
+>    2. git tag 1.0.0
+>    3. 使用 git push 命令将修改后的代码和标签推送到Git仓库 --- git push origin master --tags
+

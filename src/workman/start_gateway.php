@@ -18,7 +18,7 @@ use app\common\exception\ErrorEnum;
 
 // 自动加载类
 require_once __DIR__.'/../../../vendor/autoload.php';
-$config = require_once __DIR__.'/../../../config/panda.php';
+$config = include __DIR__.'/../../../config/panda.php';
 
 
 // gateway 进程，这里使用Text协议，可以用telnet测试
